@@ -11,26 +11,24 @@ def sort_letters(text):
     >>> sort_letters('abcabccba')
     'aaabbbccc'
     """
+def sort_letters(text):
 	if not text:
 		return text
-
+	
+	number = 0
+	place = {}
 	let = {}  #Создаю словарь, чтобы узнать сколько раз встречается буква
 	for elem in text:
 		if elem in let:
 			let[elem] += 1
 			continue
 		let[elem] = 1
-
-
-    #Например, в переменной text ('abcabc'), я сделаю из него список с элементами ['a', 'b', 'c']
-	result = []
-	for char in text:  #Делаю список из элементов без повторений
-		if char in result:
-            continue
-        result.append(char)
-    #Здесь я из списка ['a', 'b', 'c'] сделаю список ['aa', 'bb', 'cc']
-    for i in range(len(result)):
-        result[i] = result[i] * len[result[i]]
+		place[elem] = number
+		number += 1
+	
+	result = [0] * len(place) # Создаю пустой список с количеством букв
+	for elem in let:
+		result[place[elem]] = elem * let[elem]
 
 	now = ''
 	change = ''
