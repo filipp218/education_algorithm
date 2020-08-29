@@ -35,7 +35,7 @@ def sort_letters(text):
     final_result = []
     pos = 0   #для индекса в новый список
     for i in sorter:
-        final_result.insert(pos , result[i[1]])  #добавляю в финальный список элементы из result по индексу из sorter [[-3, 0], [-3, 1], [-3, 2]]
+        final_result.insert(pos , result[i[1]])  #добавляю в финальный список элементы из result, которые находятся по индексу из списка sorter [[-3, 0], [-3, 1], [-3, 2]]
         pos += 1
 
     return ''.join(final_result)
