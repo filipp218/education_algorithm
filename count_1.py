@@ -21,7 +21,7 @@ def counter_sort(numbers):
 
     result = []  #создаём список, куда сначала добавим отрицателнье
     for i in range(1000,2000):  #цикл делаем с конца диапазона
-            result.extend([i - 2000 for j in range(diapazon[i])])
+        result.extend([i - 2000 for j in range(diapazon[i])])
     for i in range (0, 1000):
         result.extend([i for j in range(diapazon[i])])
     return result
