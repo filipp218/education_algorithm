@@ -14,10 +14,7 @@ def counter_sort(numbers):
 
     diapazon= [0] * 2000  
     for num in numbers:
-        if num >=0:  #если число положительное добавляем его список с положительными
-            diapazon[num] += 1
-            continue
-        diapazon[num] += 1  #если число отрицательное добавляем его список с отрицательными
+        diapazon[num] += 1 
 
     result = []  
     for i in range(1000,2000):  
