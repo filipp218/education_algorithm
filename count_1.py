@@ -18,7 +18,7 @@ def counter_sort(numbers):
 
     result = []  
     for i in range(1000,2000):  
-        result.extend([i - 2000 for _ in range(diapazon[i])])
+        result.extend([i - 2000] * diapazon[i])
     for i in range (0, 1000):
-        result.extend([i for _ in range(diapazon[i])])
+        result.extend([i] * diapazon[i])
     return result
