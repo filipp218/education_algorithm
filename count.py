@@ -12,22 +12,30 @@ def counter_sort(numbers):
     if not numbers:
         return numbers
 
-    diapazon_plus = [0] * 1000  #положительные
-    diapazon_minus = [0] * 1000  #отрицательные
-    for num in numbers:
-        if num >=0:  #если число положительное добавляем его список с положительными
-            diapazon_plus[num] += 1
-            continue
-        diapazon_minus[-num] += 1  #если число отрицательное добавляем его список с отрицательными
+    upper_line = max(numbers) + 1  #прибавляем единицу, потому что список с нуля начинает считать
+    bottom_line = min(numbers)
 
-    result = []  #создаём список, куда сначала добавим отрицателнье
-    for i in range(len(diapazon_minus)- 1, 0 , -1):  #цикл делаем с конца диапазона
-        if diapazon_minus[i] > 0:  #если на месте индекса не ноль, значит это число было изначально
-            for num in range(diapazon_minus[i]):  #добавляем это число столько раз,сколько оно встретилось
-                result.append(-i)
+    if bottom_line >= 0:  #если нижняя граница не отрицальная, то создаём список длинной с максимальным числом +1
+        diapazon = [0] * upper_line
 
-    for i in range(len(diapazon_plus)):
-        if diapazon_plus[i] > 0:
-            for num in range(diapazon_plus[i]):
-                result.append(i)
+        for num in numbers:
+            diapazon[num] += 1
+
+        result = []
+        for i in range (0, upper_line):
+            result.extend([i] * diapazon[i])
+
+    else:
+        sum_lines = upper_line - bottom_line  #складываем верхнюю границу и нижнюю. поставил минус потому что  bottom_line отрицательное число минус на минус плюс
+        diapazon = [0] * sum_lines
+
+        for num in numbers:
+            diapazon[num] += 1
+
+        result = []
+        for i in range(upper_line,sum_lines):
+            result.extend([i - sum_lines] * diapazon[i])
+        for i in range (0, upper_line):
+            result.extend([i] * diapazon[i])
+
     return result
