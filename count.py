@@ -15,28 +15,11 @@ def counter_sort(numbers):
     upper_line = max(numbers) + 1  #прибавляем единицу, потому что список с нуля начинает считать
     bottom_line = min(numbers)
 
-    if bottom_line >= 0:  #если нижняя граница не отрицальная, то создаём список длинной с максимальным числом +1
-        minus_lines = upper_line - bottom_line
-        diapazon = [0] * minus_lines
+    minus_lines = upper_line - bottom_line
+    diapazon = [0] * minus_lines
 
-        for num in numbers:
-            diapazon[num - bottom_line] += 1
+    for num in numbers:
+        diapazon[num - bottom_line] += 1
 
-        result = []
-        for i in range (0, minus_lines):
-            result.extend([i + bottom_line] * diapazon[i])
-
-    else:
-        sum_lines = upper_line - bottom_line  #складываем верхнюю границу и нижнюю. поставил минус потому что  bottom_line отрицательное число минус на минус плюс
-        diapazon = [0] * sum_lines
-
-        for num in numbers:
-            diapazon[num] += 1
-
-        result = []
-        for i in range(upper_line,sum_lines):
-            result.extend([i - sum_lines] * diapazon[i])
-        for i in range (0, upper_line):
-            result.extend([i] * diapazon[i])
-
+    result = [(i + bottom_line) * diapazon[i] for i in range (0, minus_lines) if diapazon[i] != 0]
     return result
