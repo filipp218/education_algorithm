@@ -8,6 +8,8 @@ def counter_sort(numbers):
     [-10, -5, 0, 1, 2, 3]
     >>> counter_sort([])
     []
+    >>> counter_sort([10, 11, 10])
+    [10, 10, 11]
     """
     if not numbers:
         return numbers
@@ -20,6 +22,8 @@ def counter_sort(numbers):
 
     for num in numbers:
         diapazon[num - bottom_line] += 1
+    result = []
+    for i in range (0, minus_lines):
+        result.extend([i + bottom_line] * diapazon[i])
 
-    result = [(i + bottom_line) * diapazon[i] for i in range (0, minus_lines) if diapazon[i] != 0]
     return result
