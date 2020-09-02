@@ -1,24 +1,31 @@
-def counter_sort(numbers):
+def kth_largest(numbers, k):
     """
-    >>> counter_sort([2, 1, 4, 3, 6, 5])
-    [1, 2, 3, 4, 5, 6]
-    >>> counter_sort([10, 15, 13, 12, 11, 14])
-    [10, 11, 12, 13, 14, 15]
-    >>> counter_sort([0, -10, 1, 2, 3, -5])
-    [-10, -5, 0, 1, 2, 3]
-    >>> counter_sort([])
-    []
+    See https://leetcode.com/problems/kth-largest-element-in-an-array/
+    >>> kth_largest([3, 2, 1, 5, 6, 4], 2)
+    5
+    >>> kth_largest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4)
+    4
+    >>> kth_largest([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2)
+    9
+    >>> kth_largest([10, 9, 5, 6, 4, 7, 2, 1, 3, 8], 3)
+    8
     """
     if not numbers:
         return numbers
 
-    diapazon= [0] * 2000  
-    for num in numbers:
-        diapazon[num] += 1 
+    upper_line = max(numbers) + 1  #прибавляем единицу, потому что список с нуля начинает считать
+    bottom_line = min(numbers)
 
-    result = []  
-    for i in range(1000,2000):  
-        result.extend([i - 2000] * diapazon[i])
-    for i in range (0, 1000):
-        result.extend([i] * diapazon[i])
-    return result
+    minus_lines = upper_line - bottom_line
+    diapazon = [0] * minus_lines
+
+    for num in numbers:
+        diapazon[num - bottom_line] += 1
+
+    element = len(diapazon) - (k-1)  # Узнаём под каким индексом наш эелемент
+    place = 1  #счётчик, чтобы посчитать сколько цифр перед нашим элементом, единица чтобы прибавить наш первый элемент
+    for i in range (0, element -1):
+        place += diapazon[i]
+
+    return place
+
