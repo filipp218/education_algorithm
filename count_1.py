@@ -1,3 +1,4 @@
+
 def kth_largest(numbers, k):
     """
     See https://leetcode.com/problems/kth-largest-element-in-an-array/
@@ -8,6 +9,12 @@ def kth_largest(numbers, k):
     >>> kth_largest([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2)
     9
     >>> kth_largest([10, 9, 5, 6, 4, 7, 2, 1, 3, 8], 3)
+    8
+    >>> kth_largest([-10, -9, 5, -6, 4, 7, 2, 1, 3, 8], 3)
+    8
+    >>> kth_largest([10, 10, 15, 6, 6, 6, 2, 7, 7, 8], 3)
+    7
+    >>> kth_largest([-10, 9, -5, 6, 4, 7, -2, 1, 3, -8], 3)
     8
     """
     if not numbers:
@@ -22,10 +29,19 @@ def kth_largest(numbers, k):
     for num in numbers:
         diapazon[num - bottom_line] += 1
 
-    element = len(diapazon) - (k-1)  # Узнаём под каким индексом наш эелемент
-    place = 1  #счётчик, чтобы посчитать сколько цифр перед нашим элементом, единица чтобы прибавить наш первый элемент
-    for i in range (0, element -1):
-        place += diapazon[i]
+    result = []
+    for i in range (0, minus_lines):
+        result.extend([i + bottom_line] * diapazon[i])
 
-    return place
+    place = 0
+    last = result[-1]
+    how_digit = 1
+    for elem in reversed(result):
+        if elem != last:
+            how_digit += 1
+            last = elem
+        if how_digit > k:
+            break
+        place += 1
 
+    return len(result) - (place - 1)
