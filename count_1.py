@@ -33,9 +33,9 @@ def kth_largest(numbers, k):
     for i in range (0, minus_lines):
         result.extend([i + bottom_line] * diapazon[i])
 
-    place = 0
-    last = result[-1]
-    how_digit = 1
+    place = 0  #счётчик чтобы понять, какой элемент с конца нам нужен
+    last = result[-1]  #перемнная, которая поймёт, когда элемент с конца меняется(8, 10, 10) чтобы понял, что второй с конца это 8, а не 10
+    how_digit = 1   #счётчик, который считает сколько раз поменялось число
     for elem in reversed(result):
         if elem != last:
             how_digit += 1
