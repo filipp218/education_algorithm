@@ -17,31 +17,29 @@ def kth_largest(numbers, k):
     >>> kth_largest([-10, 9, -5, 6, 4, 7, -2, 1, 3, -8], 3)
     8
     """
-    if not numbers:
-        return numbers
-
-    upper_line = max(numbers) + 1  #прибавляем единицу, потому что список с нуля начинает считать
-    bottom_line = min(numbers)
-
-    minus_lines = upper_line - bottom_line
-    diapazon = [0] * minus_lines
-
-    for num in numbers:
-        diapazon[num - bottom_line] += 1
-
+    import heapq   #O(n)
     result = []
-    for i in range (0, minus_lines):
-        result.extend([i + bottom_line] * diapazon[i])
+    for value in numbers:
+        heapq.heappush(result, value)
+    result = [ heapq.heappop(result) for _ in range(len(result))]
+    return result[-k]
 
-    place = 0  #счётчик чтобы понять, какой элемент с конца нам нужен
-    last = result[-1]  #перемнная, которая поймёт, когда элемент с конца меняется(8, 10, 10) чтобы понял, что второй с конца это 8, а не 10
-    how_digit = 1   #счётчик, который считает сколько раз поменялось число
-    for elem in reversed(result):
-        if elem != last:
-            how_digit += 1
-            last = elem
-        if how_digit > k:
-            break
-        place += 1
 
-    return len(result) - (place - 1)
+
+    buffer = numbers[:k]
+    for n in numbers[k:]:  # O(n)
+        mins = buffer[0]  # O(1)
+        if n > mins:
+            buffer.pop(0)  # O(log(k))
+            buffer.append(n)  # O(log(k))
+    return min(buffer)  # O(n * log(k))
+
+
+    for i in range(k-1):
+        maxs = max(numbers)
+        numbers.remove(maxs)
+    return max(numbers)  # O(n * k)
+
+
+    result = sorted(numbers)  # O(n * log(n))
+    return result[-k]  # O(1)
