@@ -17,7 +17,7 @@ def kth_largest(numbers, k):
     >>> kth_largest([-10, 9, -5, 6, 4, 7, -2, 1, 3, -8], 3)
     8
     """
-    import heapq   #O(n)
+    import heapq  
     
     result = numbers[:k]
     heapq.heapify(result)
