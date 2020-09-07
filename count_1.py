@@ -18,6 +18,26 @@ def kth_largest(numbers, k):
     8
     """
     import heapq   #O(n)
+    
+    result = numbers[:k]
+    heapq.heapify(result)
+    mins = result[0]
+
+    for value in numbers[k:]:
+        if value > mins:
+            heapq.heappop(result)
+            heapq.heappush(result, value)
+            mins = result[0]
+    return mins
+    
+    
+    
+    
+    
+    
+    
+    
+    import heapq   #O(n)
     result = []
     for value in numbers:
         heapq.heappush(result, value)
