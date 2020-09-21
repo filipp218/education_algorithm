@@ -1,29 +1,25 @@
-def counter_sort(numbers):
+import heapq
+
+def k_merge(*args):
     """
-    >>> counter_sort([2, 1, 4, 3, 6, 5])
-    [1, 2, 3, 4, 5, 6]
-    >>> counter_sort([10, 15, 13, 12, 11, 14])
-    [10, 11, 12, 13, 14, 15]
-    >>> counter_sort([0, -10, 1, 2, 3, -5])
-    [-10, -5, 0, 1, 2, 3]
-    >>> counter_sort([])
+    Given an arbitrary number of sorted lists, build a merged sorted list.
+    >>> k_merge()
+    >>> k_merge([])
     []
-    >>> counter_sort([10, 11, 10])
-    [10, 10, 11]
+    >>> k_merge([1], [1])
+    [1, 1]
+    >>> k_merge([1, 3], [5], [2, 4])
+    [1, 2, 3, 4, 5]
+    >>> k_merge([1, 1, 1], [3], [2, 2])
+    [1, 1, 1, 2, 2, 3]
+    >>> k_merge([1,4,5], [1,3,4], [2,6])
+    [1, 1, 2, 3, 4, 4, 5, 6]
     """
-    if not numbers:
-        return numbers
-
-    upper_line = max(numbers) + 1  #прибавляем единицу, потому что список с нуля начинает считать
-    bottom_line = min(numbers)
-
-    minus_lines = upper_line - bottom_line
-    diapazon = [0] * minus_lines
-
-    for num in numbers:
-        diapazon[num - bottom_line] += 1
+    if not args:
+        return
     result = []
-    for i in range (0, minus_lines):
-        result.extend([i + bottom_line] * diapazon[i])
-
-    return result
+    for i in args:
+        for j in i:
+            result.append(j)
+    heapq.heapify(result)
+    return [heapq.heappop(result) for _ in range(len(result))]
