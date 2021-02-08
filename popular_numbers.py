@@ -23,7 +23,7 @@ def counter(k):
             numbs[i] = 1
     max = numbs[k[0]]
     digit = k[0]
-    for i in numbs:
+    for i in k:
         if numbs[i]>=max:
             max = numbs[i]
             digit = i
