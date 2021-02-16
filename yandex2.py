@@ -21,18 +21,17 @@ def len_compress(text):
     >>> len_compress('A15BA5')
     21
     """
-    alphabet = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'}
     counter = 0
     digit = 0
-    for i in range(len(text)):
-        if text[i] in alphabet:
+    for i in text:
+        if i.isalpha():
             if digit:
                 digit = int(digit)
                 counter += digit - 1
             counter += 1
             digit = ''
         else:
-            digit += text[i]
+            digit += i
 
     if digit:
         digit = int(digit)
