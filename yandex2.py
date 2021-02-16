@@ -22,19 +22,19 @@ def len_compress(text):
     21
     """
     counter = 0
-    digit = 0
+    buffer = 0
     for i in text:
         if i.isalpha():
-            if digit:
-                digit = int(digit)
-                counter += digit - 1
+            if buffer:
+                buffer = int(buffer)
+                counter += buffer - 1
             counter += 1
-            digit = ''
+            buffer = ''
         else:
-            digit += i
+            buffer += i
 
-    if digit:
-        digit = int(digit)
-        counter += digit - 1
+    if buffer:
+        buffer = int(buffer)
+        counter += buffer - 1
 
     return counter
