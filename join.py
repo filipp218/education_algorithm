@@ -7,9 +7,6 @@ def inner_join(t1, t2):
     >>> inner_join([(1, 2), (1, 3), (2, 5)], [(1, 1), (2, 0)])
     [(1, 2, 1), (1, 3, 1), (2, 5, 0)]
     """
-    assert len(t1) <= 15000
-    assert len(t2) <= 10000
-
     b_by_a = {}
     for a, b in t1:
         if a not in b_by_a:
