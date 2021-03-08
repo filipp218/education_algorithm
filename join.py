@@ -111,13 +111,13 @@ n1 = int(input())
 t1 = []
 t2 = []
 for i in range(n1):
-    a, b = int(input().split())
+    a, b = input().split()
     item = (a, b)
     t1.append(item)
 
 n2 = int(input())
 for i in range(n2):
-    a, c = int(input().split())
+    a, c = input().split()
     item = (a, c)
     t2.append(item)
 
