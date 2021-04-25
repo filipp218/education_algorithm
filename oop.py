@@ -40,7 +40,7 @@ with open("text.txt", "r") as text:
     for line in text.readlines():
         a = [i for i in line.split(' ')]
         if a[0] == 'Driver':
-            b = a[1][0:-1]
+            b = a[1][0:-1] # это нужно чтобы отрезать хвостик "/n", он прилипает к имени. типа "Dan/n"
             all_driver[b] = Driver(b)
         elif a[0] == 'Trip':
             way = Trip(a[2], a[3], a[4])
