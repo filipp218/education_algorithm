@@ -3,19 +3,19 @@ def how(a,b):
     >>> how("11", "123")
     '134'
 
-    >>> how("99", "11")
-    '110'
+    >>> how("456", "77")
+    '533'
 
-    >>> how("0", "123")
-    '123'
+    >>> how("0", "0")
+    '0'
     """
     numbers = {'0':0, '1':1,'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9}
     over = 0
     result = []
-
+    summa = 0
     if len(a)==1 and len(b)==1:
-        sum = numbers[a[0]] + numbers[b[0]]
-        return str(sum)
+        summa = numbers[a[0]] + numbers[b[0]]
+        return str(summa)
 
     elif len(a) == 0:
         return b
@@ -27,27 +27,32 @@ def how(a,b):
         a,b = b,a
     i = -1
     while i*(-1) != len(b)+1:
-        sum = numbers[a[i]] + numbers[b[i]]
-        sum += over
+        summa = numbers[a[i]] + numbers[b[i]]
+        summa += over
         over = 0
-        if sum > 9:
+        if summa > 9:
             over = 1
-            result.append(str(sum - 10))
+            result.append(str(summa - 10))
         else:
-            result.append(str(sum))
+            result.append(str(summa))
         i -=1
     if over > 0 and len(a) > len(b):
-        sum = numbers[a[i]] + over
+        summa = numbers[a[i]] + over
         over = 0
-        result.append(str(sum))
+        result.append(str(summa))
+        while i*(-1) != len(a):
+            result.append(str(numbers[a[i]]))
+            i -= 1
+
+    elif over == 0 and len(a) > len(b):
+        while i*(-1) != len(a)+1:
+            result.append(str(numbers[a[i]]))
+            i -= 1
 
     elif over > 0:
         result.append(str(1))
 
 
-    while i*(-1) != len(a)+1:
-        result.append(str(numbers[a[i]]))
-        i -= 1
-
     result.reverse()
     return (''.join(result))
+
