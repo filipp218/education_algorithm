@@ -1,3 +1,6 @@
+task = https://leetcode.com/problems/add-strings/submissions/
+
+
 def how(a,b):
     """
     >>> how("11", "123")
@@ -25,6 +28,8 @@ def how(a,b):
 
     if len(b) > len(a):
         a,b = b,a
+
+
     i = -1
     while i*(-1) != len(b)+1:
         summa = numbers[a[i]] + numbers[b[i]]
@@ -36,22 +41,35 @@ def how(a,b):
         else:
             result.append(str(summa))
         i -=1
+
+
     if over > 0 and len(a) > len(b):
         summa = numbers[a[i]] + over
         over = 0
-        result.append(str(summa))
+        if summa > 9:
+            over = 1
+            result.append(str(summa - 10))
+        else:
+            result.append(str(summa))
+
         while i*(-1) != len(a):
-            result.append(str(numbers[a[i]]))
             i -= 1
+            summa = numbers[a[i]] + over
+            over = 0
+            if summa > 9:
+                over = 1
+                result.append(str(summa - 10))
+            else:
+                result.append(str(summa))
+
 
     elif over == 0 and len(a) > len(b):
         while i*(-1) != len(a)+1:
             result.append(str(numbers[a[i]]))
             i -= 1
 
-    elif over > 0:
+    if over > 0:
         result.append(str(1))
-
 
     result.reverse()
     return (''.join(result))
