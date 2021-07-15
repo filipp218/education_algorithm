@@ -48,3 +48,49 @@ FROM(
 GROUP BY city, type, reportdate)
 SELECT four.city, four.type, four.minimal, four.maximal, four.reportdate, four.Last_Date, x.minimal, x.maximal from four
 LEFT JOIN four as x ON four.Last_Date = x.reportdate and four.city = x.city and four.type = x.type;
+
+
+
+
+
+
+
+
+
+
+
+# Выведите все уникальные даты из таблицы 1, где есть информация по городу Lyon для ананасов (Pinapple)
+SELECT DISTINCT reportdate FROM Table1
+WHERE city = 'Lyon' and type = 'Pinapple';
+
+# Выведите уникальный список городов и товаров из обеих таблиц
+with t1 as (
+    SELECT * from Table1
+    UNION ALL SELECT * from Table2
+)
+SELECT DISTINCT city, type from t1;
+
+# Найдите такие типы товаров для Lyon, которые отсутствуют в таблице 2, но которые есть в таблице 1
+SELECT Table1.type FROM Table1
+LEFT JOIN Table2 ON Table1.type = Table2.type and Table2.city = Table1.city
+WHERE Table2.type is NULL and Table1.city = 'Lyon';
+
+# Найдите все даты из таблицы 1, которых нет в таблице 2
+SELECT Table1.reportdate FROM Table1
+LEFT JOIN Table2 ON Table1.reportdate = Table2.reportdate
+WHERE Table2.reportdate is NULL;
+
+# Объедините таблицы и выведите для каждого города самый дорогой товар
+With t1 as (SELECT * FROM Table1
+UNION ALL SELECT * from Table2),
+t2 as (SELECT city, max(cost) as cost from t1
+GROUP BY city)
+SELECT t1.city, t1.type from t1
+LEFT JOIN t2 ON t1.city = t2.city
+WHERE t1.cost = t2.cost
+
+# Объедините таблицы и выведите все неуникальные строки
+SELECT * FROM (SELECT * FROM Table1
+UNION ALL SELECT * from Table2) z
+GROUP BY city, type, cost, reportdate
+HAVING count(*)>1;
