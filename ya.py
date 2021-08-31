@@ -7,6 +7,11 @@
 << 3
 
 
+def func(seq): #O(n)
+    s = sum(i for i in range(len(seq) + 1))
+    return s - sum(seq)
+
+
 def func(seq): #(N log n) по времени
     seq.sort()
     previus = seq[0]
